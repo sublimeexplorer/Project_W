@@ -9,3 +9,4 @@ services:
       - .:/temp_service
     ports:
       - "8000:8000"
+
