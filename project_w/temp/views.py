@@ -6,6 +6,10 @@ from .models import Book
 from .serializers import BookSerializer
 
 # Create your views here.
+@api_view(['GET'])
+def hello_world(request):
+    return Response("Hello, World!", status=status.HTTP_200_OK)
+
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def book_list(request):
