@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from ..services.user_service import create_user, get_user
+from ..services.user_services import create_user, get_user
 
 # www.projectw.com/users/....
 bp = Blueprint('users', __name__, url_prefix='/users')
