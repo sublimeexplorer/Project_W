@@ -1,5 +1,5 @@
 """
-URL configuration for main_server project.
+URL configuration for backend project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -19,9 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/members/', include('apps.members.urls')), #
-    path('api/workouts/', include('apps.workouts.urls')), #
-    path('api/nutrition/', include('apps.nutrition.urls')), #
-    path('api/messaging/', include('apps.messaging.urls')), #
-    path('api/payments/', include('apps.payments.urls')), #
+    path('', include('app.urls'))
 ]

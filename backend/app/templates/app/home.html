@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Welcome to My Django Site</h1>
+<p>This is the home page of our website. Here you can add any content you want to display on the main page.</p>
+
+{% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}! You are logged in.</p>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a>
+{% else %}
+    <p>You are not logged in. <a href="{% url 'login' %}">Click here to login</a>.</p>
+{% endif %}
+{% endblock %}
