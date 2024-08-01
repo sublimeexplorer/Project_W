@@ -15,10 +15,13 @@ class MemberCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         
         
-        
+
+class LoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
         
 """
-Certainly! I'll walk you through the typical order of operations that occur when a user submits a registration form in a Django application, from form submission to database entry:
+
 
 1. Form Submission:
    - User fills out the registration form and clicks submit.

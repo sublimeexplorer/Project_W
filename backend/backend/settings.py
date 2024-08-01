@@ -27,6 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'app.templates',
+    'app.backends',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'app.backends.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as a fallback
 ]
 
 AUTH_USER_MODEL = 'app.Member'

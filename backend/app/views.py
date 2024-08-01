@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth import get_user_model, authenticate, login as auth_login
+from django.views.decorators.csrf import csrf_protect
+from .forms import LoginForm
 from .forms import MemberCreationForm
 from .models import Member
-from django.contrib import messages
-from django.contrib.auth import get_user_model
 
 
 # from . import helpers as _
@@ -11,13 +12,13 @@ from django.contrib.auth import get_user_model
 ################################
 # TODO:
 # - DJANGO MIGRATIONS (X)
-# - CONNECT SERVER (VIEWS) TO DATABASE
+# - CONNECT SERVER (VIEWS) TO DATABASE (X)
 # - CHECK_INPUT_VALIDITY
-# - ADD USER TO DATABASE
+# - ADD USER TO DATABASE (X)
 # - LOGIN PAGE (X)
 # - AUTHENTICATE LOGIN PROCESS
 # - ONLY SHOW "HOME" PAGE IF LOGIN IS VALIDATED/AUTHENTICATED
-# - SESSION (?)
+# - SESSION
 ################################
 
 
@@ -52,30 +53,35 @@ def register(request):
         
 
 
+@csrf_protect
 def login(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        
-        try:
-            # Try to find a member with the provided email
-            member = Member.objects.get(email=email)
-            
-            # Check if the password matches
-            if member.password == password:  # Note: This is not secure, see below
-                # Successful login
+        form = LoginForm(request.POST)
+        print(form)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            print(email, password)
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                auth_login(request, user)
                 # messages.success(request, 'Login successful!')
-                print('login successful')
-                # You might want to set up a session here
+                print('Login successful')
                 return redirect('home')  # Redirect to home page or dashboard
             else:
-                # messages.error(request, 'Invalid password')
-                print('Invalid entry')
-        except Member.DoesNotExist:
-            # messages.error(request, 'No account found with this email')
-            print('No account found with this email')
+                # messages.error(request, 'Invalid email or password')
+                print('Invalid email or password')
+        else:
+            # messages.error(request, 'Invalid form submission')
+            print('Invalid form submission')
+    else:
+        form = LoginForm()
     
-    return render(request, 'app/login.html')
+    return render(request, 'app/login.html', {'form': form})
+
+def logout(request):
+    return HttpResponse("logout page")
+    # return render(request, 'app/login.html')
 
 def get_user(request):
     pass
