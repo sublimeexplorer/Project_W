@@ -7,13 +7,13 @@ FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
 # create root directory for our project in the container
-RUN mkdir /temp_service
+RUN mkdir /project_w_server
 
 # Set the working directory to /temp_service
-WORKDIR /temp_service
+WORKDIR /project_w_server
 
 # Copy the current directory contents into the container at /temp_service
-COPY . /temp_service/
+COPY . /project_w_server/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt

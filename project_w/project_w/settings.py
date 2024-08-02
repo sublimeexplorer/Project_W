@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-qx^kyy-pl^0+*ia=^v*yjkk2ul^z!ce2dxtb!_79!-7y$0419c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0"]
+ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "user",
     "temp",
     "rest_framework"
 ]
@@ -86,7 +87,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
-AUTHENTICATION_BACKENDS = ['auth.AuthBackend', 'django.contrib.auth.backends.ModelBackend']
+AUTHENTICATION_BACKENDS = ['user.AuthBackend', 'django.contrib.auth.backends.ModelBackend']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -103,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'auth.Member'
+AUTH_USER_MODEL = 'user.Member'
 
 
 # Internationalization

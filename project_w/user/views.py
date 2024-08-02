@@ -6,9 +6,14 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login, logout
 from .models import Member
 
+
 # Create your views here.
+@api_view(['GET'])
+def hello_world(request):
+    return Response("Hello, World!", status=status.HTTP_200_OK)
+
 @api_view(['POST'])
-def user_signup(request):
+def register(request):
     if request.method == 'POST':
         email = request.data.get('email')
         password = request.data.get('password')
@@ -21,11 +26,10 @@ def user_signup(request):
         return Response({'token': token.key}, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
-def user_login(request):
+def login(request):
     if request.method == 'POST':
         email = request.data.get('email')
         password = request.data.get('password')
-
         user = authenticate(request, email=email, password=password)
         if user:
             login(request, user)
@@ -36,7 +40,7 @@ def user_login(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def user_logout(request):
+def logout(request):
     if request.method == 'POST':
         request.user.auth_token.delete()
         logout(request)
