@@ -24,7 +24,6 @@ class LoginView(APIView):
             return Response({
                 'user': {
                     'email': user.email,
-                    'is_staff': user.is_staff,
                 },
                 'tokens': tokens,
             }, status=status.HTTP_200_OK)
@@ -42,3 +41,4 @@ class LogoutView(APIView):
           except Exception as e:
                print(e)
                return Response(status=status.HTTP_400_BAD_REQUEST)
+        
