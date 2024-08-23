@@ -1,4 +1,4 @@
-#!/Users/jacobseol/Projects/Project-W/project_w/project_w_venv/bin/python3
+#!/Users/seouljacob/Documents/Project-W/project_w/project_w_venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
