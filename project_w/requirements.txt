@@ -1,15 +1,6 @@
-asgiref
-blinker
-click
 Django
 django-cors-headers
 djangorestframework
 djangorestframework-simplejwt
 python-dotenv
-itsdangerous
-Jinja2
-MarkupSafe
 pytest-django
-sqlparse
-typing_extensions
-Werkzeug
