@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('email', 'password', 'tokens')
 
     def get_tokens(self, user):
+        print(user)
         refresh = RefreshToken.for_user(user)
         return {
             'refresh_token': str(refresh),

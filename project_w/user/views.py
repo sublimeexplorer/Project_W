@@ -3,8 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
-from .serializers import UserRegistrationSerializer, UserLoginSerializer
-
+from .serializers import UserLoginSerializer, UserRegistrationSerializer
 
 # Create your views here.
 class UserRegistrationView(APIView):
@@ -20,7 +19,7 @@ class LoginView(APIView):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data['user']
-            tokens = serializer.get_tokens(user)
+            tokens = serializer.get_tokens(user) 
             return Response({
                 'user': {
                     'email': user.email,
